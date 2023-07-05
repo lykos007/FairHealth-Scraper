@@ -1,8 +1,10 @@
+import time 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 
 # Create a new instance of the web driver
@@ -45,33 +47,37 @@ url = driver.current_url
 # Print or use the URL as needed
 print("Current URL:", url)
 
-# input_element.click()
+# Find the input element by ID or any other suitable locator
+input_element = driver.find_element(By.ID, 'location')  # Replace 'example-id' with the desired ID
 
-# Find the <i> element by class name
-# i_element = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'i.fa.fa-chevron-square-right')))
+# Enter text into the input element
+input_element.send_keys('60053')
 
-# Print the class name
-# print("Class name:", i_element.get_attribute("class"))
+# Find the <div> element by class name
+div_element = driver.find_element(By.CLASS_NAME, 'step2Btn')
 
+class_name = div_element.get_attribute('class')
+print("Class name:", class_name)
 
+# Find the <a> element by class name
+# a_element = driver.find_element(By.CLASS_NAME, 'next')
 
-# i_element.click()
+wait = WebDriverWait(driver, 10)
+a_element = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'next')))
 
+class_name = a_element.get_attribute('class')
+print("Class name:", class_name)
 
-""" clickable_elements = driver.find_elements_by_xpath("//a | //button | //input[@type='submit'] | //input[@type='button'] | //input[@type='image'] | //input[@type='checkbox'] | //input[@type='radio'] | //select | //textarea")
+a_element.click()
 
-# Print the clickable elements
-for element in clickable_elements:
-    print("Clickable Element:", element)
- """
+# Wait for 10 seconds
+time.sleep(10)
 
-# Set the radio button to checked
-# driver.execute_script("arguments[0].checked = true;", radio_button)
+# Get the current URL
+url = driver.current_url
 
-# print(input_element.value)
-
-# Find the img element by class using CSS selector
-# image = driver.find_element(By.CSS_SELECTOR, "i.fa.fa-chevron-square-right")  # Replace 'class-name' with the desired class name# Click the span
+# Print or use the URL as needed
+print("Current URL:", url)
 
 # Close the browser
 # driver.quit()
